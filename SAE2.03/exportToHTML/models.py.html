@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>models.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+models.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">django</span><span class="s2">.</span><span class="s1">db </span><span class="s0">import </span><span class="s1">models</span>
+
+<span class="s0">class </span><span class="s1">Etudiant</span><span class="s2">(</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Model</span><span class="s2">):</span>
+    <span class="s1">numero_etudiant </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">50</span><span class="s2">, </span><span class="s1">unique</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">nom </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">100</span><span class="s2">)</span>
+    <span class="s1">prenom </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">100</span><span class="s2">)</span>
+    <span class="s1">groupe </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">50</span><span class="s2">, </span><span class="s1">blank</span><span class="s2">=</span><span class="s0">True</span><span class="s2">, </span><span class="s1">null</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">photo </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">ImageField</span><span class="s2">(</span><span class="s1">upload_to</span><span class="s2">=</span><span class="s4">'photos/'</span><span class="s2">, </span><span class="s1">blank</span><span class="s2">=</span><span class="s0">True</span><span class="s2">, </span><span class="s1">null</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">email </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">EmailField</span><span class="s2">(</span><span class="s1">blank</span><span class="s2">=</span><span class="s0">True</span><span class="s2">, </span><span class="s1">null</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+
+<span class="s0">class </span><span class="s1">UE</span><span class="s2">(</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Model</span><span class="s2">):</span>
+    <span class="s1">code </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">20</span><span class="s2">, </span><span class="s1">primary_key</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">nom </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">200</span><span class="s2">)</span>
+    <span class="s1">semestre </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">20</span><span class="s2">)</span>
+    <span class="s1">credit_ects </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">IntegerField</span><span class="s2">()</span>
+
+<span class="s0">class </span><span class="s1">Ressource</span><span class="s2">(</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Model</span><span class="s2">):</span>
+    <span class="s1">code </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">50</span><span class="s2">, </span><span class="s1">primary_key</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+    <span class="s1">nom </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">200</span><span class="s2">)</span>
+    <span class="s1">descriptif </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">TextField</span><span class="s2">()</span>
+    <span class="s1">coefficient </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">FloatField</span><span class="s2">()</span>
+    <span class="s1">ue </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">ForeignKey</span><span class="s2">(</span><span class="s1">UE</span><span class="s2">, </span><span class="s1">on_delete</span><span class="s2">=</span><span class="s1">models</span><span class="s2">.</span><span class="s1">CASCADE</span><span class="s2">)</span>
+
+<span class="s0">class </span><span class="s1">Enseignant</span><span class="s2">(</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Model</span><span class="s2">):</span>
+    <span class="s1">nom </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">100</span><span class="s2">)</span>
+    <span class="s1">prenom </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">100</span><span class="s2">)</span>
+
+<span class="s0">class </span><span class="s1">Examen</span><span class="s2">(</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Model</span><span class="s2">):</span>
+    <span class="s1">titre </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">CharField</span><span class="s2">(</span><span class="s1">max_length</span><span class="s2">=</span><span class="s3">200</span><span class="s2">)</span>
+    <span class="s1">date </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">DateField</span><span class="s2">()</span>
+    <span class="s1">coefficient </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">FloatField</span><span class="s2">()</span>
+    <span class="s1">ue </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">ForeignKey</span><span class="s2">(</span><span class="s1">UE</span><span class="s2">, </span><span class="s1">on_delete</span><span class="s2">=</span><span class="s1">models</span><span class="s2">.</span><span class="s1">CASCADE</span><span class="s2">)</span>
+    <span class="s1">enseignant </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">ForeignKey</span><span class="s2">(</span><span class="s1">Enseignant</span><span class="s2">, </span><span class="s1">on_delete</span><span class="s2">=</span><span class="s1">models</span><span class="s2">.</span><span class="s1">SET_NULL</span><span class="s2">, </span><span class="s1">null</span><span class="s2">=</span><span class="s0">True</span><span class="s2">, </span><span class="s1">blank</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+                                              <span class="s5"># ← ajout</span>
+
+<span class="s0">class </span><span class="s1">Note</span><span class="s2">(</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Model</span><span class="s2">):</span>
+    <span class="s1">examen </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">ForeignKey</span><span class="s2">(</span><span class="s1">Examen</span><span class="s2">, </span><span class="s1">on_delete</span><span class="s2">=</span><span class="s1">models</span><span class="s2">.</span><span class="s1">CASCADE</span><span class="s2">)</span>
+    <span class="s1">etudiant </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">ForeignKey</span><span class="s2">(</span><span class="s1">Etudiant</span><span class="s2">, </span><span class="s1">on_delete</span><span class="s2">=</span><span class="s1">models</span><span class="s2">.</span><span class="s1">CASCADE</span><span class="s2">)</span>
+    <span class="s1">note </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">FloatField</span><span class="s2">()</span>
+    <span class="s1">appreciation </span><span class="s2">= </span><span class="s1">models</span><span class="s2">.</span><span class="s1">TextField</span><span class="s2">(</span><span class="s1">blank</span><span class="s2">=</span><span class="s0">True</span><span class="s2">, </span><span class="s1">null</span><span class="s2">=</span><span class="s0">True</span><span class="s2">)</span>
+
+    <span class="s0">class </span><span class="s1">Meta</span><span class="s2">:</span>
+        <span class="s1">unique_together </span><span class="s2">= (</span><span class="s4">'examen'</span><span class="s2">, </span><span class="s4">'etudiant'</span><span class="s2">)</span></pre>
+</body>
+</html>

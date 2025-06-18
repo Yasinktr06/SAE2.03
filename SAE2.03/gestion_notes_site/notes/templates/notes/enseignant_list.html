@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des enseignants</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Liste des enseignants</h1>
+
+    <a href="{% url 'etudiant_list' %}"      class="add-btn">← Retour aux étudiants</a>
+    <a href="{% url 'enseignant_new' %}"     class="add-btn" style="margin-left:1rem;">➕ Ajouter un enseignant</a>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for e in enseignants %}
+        <tr>
+          <td>{{ e.prenom }}</td>
+          <td>{{ e.nom }}</td>
+          <td>
+            <a href="{% url 'enseignant_edit' e.pk %}"   class="action-btn">✏️</a>
+            <a href="{% url 'enseignant_delete' e.pk %}" class="action-btn">🗑️</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3" style="text-align:center;">Aucun enseignant enregistré.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

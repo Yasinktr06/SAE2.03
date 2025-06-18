@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Supprimer Note</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Supprimer la note</h1>
+    <p>Es-tu sûr·e de vouloir supprimer la note de 
+      <strong>{{ object.etudiant.prenom }} {{ object.etudiant.nom }}</strong> 
+      pour l’examen <strong>{{ object.examen.titre }}</strong> ?
+    </p>
+    <form method="post">{% csrf_token %}
+      <button type="submit" class="btn btn-delete">Oui, supprimer</button>
+      <a href="{% url 'note_list' %}" class="btn-cancel">Non, retour</a>
+    </form>
+  </div>
+</body>
+</html>

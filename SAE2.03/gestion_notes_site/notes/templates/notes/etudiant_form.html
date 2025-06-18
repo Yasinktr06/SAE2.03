@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Étudiant</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>{% if view.object %}Modifier{% else %}Nouveau{% endif %} Étudiant</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      {% for field in form %}
+        <p>
+          <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label><br>
+          {{ field }}
+          {{ field.errors }}
+        </p>
+      {% endfor %}
+      <div>
+        <button type="submit" class="btn btn-submit">Enregistrer</button>
+        <a href="{% url 'etudiant_list' %}" class="btn-cancel">Annuler</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

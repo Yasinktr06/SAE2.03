@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{% if view.object %}Modifier examen{% else %}Nouvel examen{% endif %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>{% if view.object %}Modifier examen{% else %}Nouvel examen{% endif %}</h1>
+
+    <a href="{% url 'examen_list' %}" class="add-btn">← Retour aux examens</a>
+
+    <form method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-submit">Enregistrer</button>
+      <a href="{% url 'examen_list' %}" class="btn btn-cancel">Annuler</a>
+    </form>
+  </div>
+</body>
+</html>

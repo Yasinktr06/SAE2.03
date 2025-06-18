@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Supprimer enseignant</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Supprimer enseignant</h1>
+
+    <a href="{% url 'enseignant_list' %}" class="add-btn">← Retour aux enseignants</a>
+
+    <p>Es-tu sûr·e de vouloir supprimer : 
+       <strong>{{ object.prenom }} {{ object.nom }}</strong> ?
+    </p>
+    <form method="post">{% csrf_token %}
+      <button type="submit" class="btn btn-delete">Oui, supprimer</button>
+      <a href="{% url 'enseignant_list' %}" class="btn btn-cancel">Non</a>
+    </form>
+  </div>
+</body>
+</html>

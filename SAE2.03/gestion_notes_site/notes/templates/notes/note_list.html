@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des notes</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Liste des notes</h1>
+
+    <div class="btn-group">
+      <a href="{% url 'note_new' %}"        class="btn btn-primary">➕ Ajouter une note</a>
+      <a href="{% url 'enseignant_new' %}" class="btn btn-primary">➕ Ajouter un enseignant</a>
+      <a href="{% url 'ressource_new' %}"  class="btn btn-primary">➕ Ajouter une ressource</a>
+      <a href="{% url 'ue_new' %}"         class="btn btn-primary">➕ Ajouter une UE</a>
+      <a href="{% url 'examen_new' %}"     class="btn btn-primary">➕ Ajouter un examen</a>
+      <a href="{% url 'etudiant_list' %}"  class="btn btn-link">← Retour aux étudiants</a>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Étudiant</th>
+          <th>UE</th>
+          <th>Ressources</th>
+          <th>Examen</th>
+          <th>Enseignant</th>
+          <th>Note</th>
+          <th>Appréciation</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for note in notes %}
+          <tr>
+            <td>{{ note.etudiant.prenom }} {{ note.etudiant.nom }}</td>
+            <td>{{ note.examen.ue.nom }} ({{ note.examen.ue.code }})</td>
+            <td>
+              {% if note.examen.ue.ressource_set.all %}
+                {% for res in note.examen.ue.ressource_set.all %}
+                  {{ res.nom }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              {% else %}
+                —
+              {% endif %}
+            </td>
+            <td>{{ note.examen.titre }}</td>
+            <td>{{ note.examen.enseignant.prenom }} {{ note.examen.enseignant.nom }}</td>
+            <td>{{ note.note }}</td>
+            <td>{{ note.appreciation|default:"—" }}</td>
+            <td>
+              <a href="{% url 'note_edit' note.pk %}"   class="action-btn">✏️</a>
+              <a href="{% url 'note_delete' note.pk %}" class="action-btn">🗑️</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="8" style="text-align:center;">Aucune note enregistrée.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

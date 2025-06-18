@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des UE</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Liste des UE</h1>
+
+    <a href="{% url 'etudiant_list' %}" class="add-btn">← Retour aux étudiants</a>
+    <a href="{% url 'ue_new' %}"         class="add-btn" style="margin-left:1rem;">➕ Ajouter une UE</a>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Nom</th>
+          <th>Semestre</th>
+          <th>Crédits</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ue in ues %}
+        <tr>
+          <td>{{ ue.code }}</td>
+          <td>{{ ue.nom }}</td>
+          <td>{{ ue.semestre }}</td>
+          <td>{{ ue.credit_ects }}</td>
+          <td>
+            <a href="{% url 'ue_edit' ue.pk %}"   class="action-btn">✏️</a>
+            <a href="{% url 'ue_delete' ue.pk %}" class="action-btn">🗑️</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" style="text-align:center;">Aucune UE enregistrée.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

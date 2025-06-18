@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des étudiants</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Liste des étudiants</h1>
+
+    <a href="{% url 'etudiant_new' %}" class="add-btn">➕ Ajouter un étudiant</a>
+    <a href="{% url 'note_list' %}" class="add-btn" style="margin-left:1rem;">
+      📊 Voir toutes les notes
+    </a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Numéro</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Actions</th>
+          <th>Noter</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for etu in object_list %}
+          <tr>
+            <td>{{ etu.id }}</td>
+            <td>{{ etu.numero_etudiant }}</td>
+            <td>{{ etu.nom }}</td>
+            <td>{{ etu.prenom }}</td>
+            <td>
+              <a href="{% url 'etudiant_edit' etu.pk %}" class="action-btn">✏️</a>
+              <a href="{% url 'etudiant_delete' etu.pk %}" class="action-btn">🗑️</a>
+            </td>
+            <td>
+              <a href="{% url 'note_new' %}?etudiant={{ etu.pk }}" class="add-btn">
+                ✏️ Noter
+              </a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="6" style="text-align:center;">
+              Aucun étudiant enregistré.
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

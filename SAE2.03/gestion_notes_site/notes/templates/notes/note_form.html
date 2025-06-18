@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter une note</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Ajouter une note</h1>
+    <form method="post" action="?etudiant={{ etudiant_obj.pk }}">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  {{ form.etudiant }}
+  {% if etudiant_obj %}
+    <p><strong>Étudiant :</strong> {{ etudiant_obj.prenom }} {{ etudiant_obj.nom }}</p>
+  {% endif %}
+
+  <p>
+    <label for="{{ form.ue_number.id_for_label }}">UE associée</label><br>
+    {{ form.ue_number }}<br>
+    {{ form.ue_number.errors }}
+  </p>
+
+  <p>
+    <label for="{{ form.examen_name.id_for_label }}">Titre de l’examen</label><br>
+    {{ form.examen_name }}<br>
+    {{ form.examen_name.errors }}
+  </p>
+
+  <p>
+    <label for="{{ form.enseignant.id_for_label }}">Enseignant</label><br>
+    {{ form.enseignant }}<br>
+    {{ form.enseignant.errors }}
+  </p>
+<p>
+        <label for="{{ form.ressource.id_for_label }}">Ressource</label><br>
+        {{ form.ressource }}
+        {{ form.ressource.errors }}
+      </p>
+  <p>
+    <label for="{{ form.note.id_for_label }}">Note</label><br>
+    {{ form.note }}<br>
+    {{ form.note.errors }}
+  </p>
+
+  <p>
+    <label for="{{ form.appreciation.id_for_label }}">Appréciation</label><br>
+    {{ form.appreciation }}<br>
+    {{ form.appreciation.errors }}
+  </p>
+
+    <div style="margin-top:1rem;">
+        <!-- Bouton pour soumettre le formulaire -->
+        <button type="submit" class="btn btn-submit">Enregistrer</button>
+        <!-- Lien pour annuler et revenir à la liste des notes -->
+        <a href="{% url 'note_list' %}" class="btn-cancel">Annuler</a>
+      </div>
+</form>
+
+  </div>
+</body>
+</html>
