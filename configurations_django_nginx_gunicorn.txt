@@ -3,7 +3,7 @@ Nginx Configuration:
 
 server {
     listen 80;
-    server_name yourdomain.com;  # Remplacez par votre nom de domaine ou adresse IP
+    server_name gestion_notes.com;  
 
     location / {
         proxy_pass http://127.0.0.1:8000;  # Proxy vers Gunicorn
@@ -14,11 +14,11 @@ server {
     }
 
     location /static/ {
-        alias /path/to/your/project/static/;  # Remplacez par le chemin vers votre dossier static
+        alias /path/to/note/project/static/; 
     }
 
     location /media/ {
-        alias /path/to/your/project/media/;   # Remplacez par le chemin vers votre dossier media
+        alias /path/to/gestion_note/project/media/;  
     }
 }
 
@@ -38,7 +38,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gestion_notes',
         'USER': 'gestuser',
-        'PASSWORD': 'yourpassword',
+        'PASSWORD': 'toto',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
